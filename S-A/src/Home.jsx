@@ -1,8 +1,8 @@
+// src/Home.jsx
 import React, { useState } from 'react';
-import './Home.css'; // Estilo do Home
-import HistoricoEPIs from './HistoricoEPIs'; // Importe o componente de histórico de EPIs
+import './Home.css';
 
-const Home = ({ setCurrentPage }) => { // Adicionando setCurrentPage como uma prop
+const Home = ({ setCurrentPage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -13,7 +13,7 @@ const Home = ({ setCurrentPage }) => { // Adicionando setCurrentPage como uma pr
     <div>
       <header className="header">
         <div className="menu-icon" onClick={toggleMenu}>
-          &#9776; {/* Ícone do menu sanduíche */}
+          &#9776;
         </div>
         <div className="profile-container">
           <img 
@@ -28,10 +28,11 @@ const Home = ({ setCurrentPage }) => { // Adicionando setCurrentPage como uma pr
         <div className="sidebar-content">
           <h3>Menu</h3>
           <ul>
+            <li onClick={() => setCurrentPage('home')}>Home</li>
             <li onClick={() => setCurrentPage('historico')}>Histórico de EPIs</li>
             <li onClick={() => setCurrentPage('historicoFuncionarios')}>Histórico de Funcionários</li>
             <li onClick={() => setCurrentPage('registroEPIs')}>Registro de EPIs</li>
-            <li onClick={() => setCurrentPage('registroFuncionarios')}>Registro de Funcionários</li>
+            <li onClick={() => setCurrentPage('registroFuncionarios')}>Registro de Funcionários</li> {/* Novo item no menu */}
           </ul>
         </div>
       </div>

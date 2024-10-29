@@ -1,20 +1,43 @@
+// src/App.jsx
 import React, { useState } from 'react';
-import Login from './Login.jsx'; // Ajuste o caminho se necessário
-import Home from './Home.jsx'; // Corrigido para importar Home
+import Login from './Login.jsx';
+import Home from './Home.jsx';
+import HistoricoEPIs from './HistoricoEPIs';
+import HistoricoFuncionarios from './HistoricoFuncionarios'; // Importe o novo componente
+import RegistroEPIs from './RegistroEPIs'; // Importe o componente de Registro de EPIs
+import RegistroFuncionarios from './RegistroFuncionarios'; // Importe o componente de Registro de Funcionários
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para controlar login
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentPage, setCurrentPage] = useState('home'); // Estado para a página atual
 
   const handleLogin = () => {
-    setIsLoggedIn(true); // Altera o estado para logado
+    setIsLoggedIn(true);
+  };
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'home':
+        return <Home setCurrentPage={setCurrentPage} />;
+      case 'historico':
+        return <HistoricoEPIs setCurrentPage={setCurrentPage} />;
+      case 'historicoFuncionarios':
+        return <HistoricoFuncionarios setCurrentPage={setCurrentPage} />;
+      case 'registroEPIs':
+        return <RegistroEPIs setCurrentPage={setCurrentPage} />;
+      case 'registroFuncionarios': // Adicione esta linha
+        return <RegistroFuncionarios setCurrentPage={setCurrentPage} />; // Renderize o componente de Registro de Funcionários
+      default:
+        return <Home setCurrentPage={setCurrentPage} />;
+    }
   };
 
   return (
     <div>
       {!isLoggedIn ? (
-        <Login onLogin={handleLogin} /> // Passa a função de login como props
+        <Login onLogin={handleLogin} />
       ) : (
-        <Home />
+        renderPage() // Renderiza a página com base em currentPage
       )}
     </div>
   );

@@ -1,18 +1,24 @@
-// HistoricoEPIs.jsx
 import React, { useState } from 'react';
-import './HistoricoEPIs.css';
+import './HistoricoFuncionarios.css'; // Estilo específico para o histórico de Funcionários
 
-const HistoricoEPIs = ({ setCurrentPage }) => {
+const HistoricoFuncionarios = ({ setCurrentPage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleSearch = () => {
+    // Aqui você pode implementar a lógica para buscar os funcionários
+    console.log("Buscando por:", searchTerm);
+    alert(`Buscando por: ${searchTerm}`); // Exibe um alerta com o termo de busca
+  };
+
   return (
     <div>
       <header className="header">
-        <div className="menu-icon" onClick={toggleMenu}>
+        <div className="menu-icon" onClick={toggleMenu} aria-label="Abrir menu">
           &#9776;
         </div>
         <div className="user-photo">
@@ -24,7 +30,6 @@ const HistoricoEPIs = ({ setCurrentPage }) => {
           <span className="username">Nome do Usuário</span>
         </div>
       </header>
-      
       <div className={`sidebar ${isMenuOpen ? 'open' : ''}`}>
         <div className="sidebar-content">
           <h3>Menu</h3>
@@ -37,39 +42,41 @@ const HistoricoEPIs = ({ setCurrentPage }) => {
           </ul>
         </div>
       </div>
-      
       <div className="content">
-        
         <div className="search-container">
-          <input type="text" placeholder="Pesquisar EPI..." className="search-input" />
-          <button className="search-button">Buscar</button>
+          <input 
+            type="text" 
+            value={searchTerm} 
+            onChange={(e) => setSearchTerm(e.target.value)} 
+            placeholder="Buscar funcionário..." 
+            className="search-input"
+          />
+          <button onClick={handleSearch} className="search-button">Buscar</button>
         </div>
-        
+
         <div className="table-container">
           <table className="table">
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Nome do EPI</th>
-                <th>Data de Retirada</th>
-                <th>Data de Devolução</th>
-                <th>Funcionário</th>
+                <th>Nome do Funcionário</th>
+                <th>Data de Acesso</th>
+                <th>Detalhes</th>
               </tr>
             </thead>
             <tbody>
+              {/* Exemplo de dados do histórico de funcionários */}
               <tr>
                 <td>1</td>
-                <td>Capacete</td>
-                <td>01/10/2024</td>
-                <td>05/10/2024</td>
                 <td>João Silva</td>
+                <td>01/10/2024</td>
+                <td>Detalhes...</td>
               </tr>
               <tr>
                 <td>2</td>
-                <td>Óculos de Proteção</td>
-                <td>02/10/2024</td>
-                <td>06/10/2024</td>
                 <td>Maria Santos</td>
+                <td>02/10/2024</td>
+                <td>Detalhes...</td>
               </tr>
               {/* Adicione mais linhas conforme necessário */}
             </tbody>
@@ -80,4 +87,4 @@ const HistoricoEPIs = ({ setCurrentPage }) => {
   );
 };
 
-export default HistoricoEPIs;
+export default HistoricoFuncionarios;
