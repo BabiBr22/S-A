@@ -1,14 +1,21 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../index'); // Importando a instância do Sequelize do seu index.js
+// models/Epi.js
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../db');
+const Categoria = require('.Categoria.js'); // Importando o modelo Categoria
 
-const Epi = sequelize.define('Epi', {
+class Epi extends Model {}
+
+Epi.init({
   nome: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  categoria: {
-    type: DataTypes.STRING,
-    allowNull: false,
+  categoriaId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: Categoria,
+      key: 'id',
+    },
   },
   quantidade: {
     type: DataTypes.INTEGER,
@@ -19,7 +26,11 @@ const Epi = sequelize.define('Epi', {
     allowNull: false,
   },
 }, {
-  tableName: 'epis', // Nome da tabela no banco de dados
+  sequelize,
+  modelName: 'epi',
 });
+
+// Definindo a relação
+Epi.belongsTo(Categoria, { foreignKey: 'categoriaId' });
 
 module.exports = Epi;

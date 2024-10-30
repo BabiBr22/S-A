@@ -1,23 +1,24 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../db');
 
 const Funcionario = sequelize.define('Funcionario', {
   nome: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   cargo: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
-  departamento: {
+  email: {
     type: DataTypes.STRING,
-    allowNull: false
-  }
-}, {
-  tableName: 'funcionarios'
+    unique: true,
+    allowNull: false,
+  },
+  senha: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
 });
-
-Funcionario.sync({ force: false });
 
 module.exports = Funcionario;
