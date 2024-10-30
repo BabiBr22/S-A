@@ -2,3 +2,9 @@ npm install express sequelize pg pg-hstore body-parser dotenv cors
 
 
 se inicia assim o servidor: node index
+
+
+npm install sequelize pg pg-hstore
+
+
+dependencias server: npm install express sequelize body-parser cors
